@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block jquery %}
+	$signUpCount = {{ count }};
+	
+	<!--  $(".progress-bar").css("width", "80%").attr("aria-valuenow", "80").text("80%"); -->
+	function completeBlock(progressBarId){
+		$(progressBarId).css("width", "100%").attr("aria-valuenow", "100").text("Completed");
+	};
+	function setNewPerc(progressBarId, perctNum, friendNum){
+		$(progressBarId).css("width", perctNum + "%").attr("aria-valuenow", perctNum).text(friendNum + " Joined");
+	};
+
+	if($signUpCount >= 0 && $signUpCount < 5) {
+		$newpercent = $signUpCount / 5 * 100;
+		setNewPerc("#count5", $newpercent, $signUpCount)
+	} else if ($signUpCount>=5 && $signUpCount < 15) {
+		completeBlock("#count5");
+		$newCount = $signUpCount - 5;
+		$newpercent = $newCount / 10 * 100;
+		setNewPerc("#count15", $newpercent, $signUpCount)
+	} else if ($signUpCount>=15 && $signUpCount < 25) { 
+		completeBlock("#count5");
+		completeBlock("#count15");
+		$newCount = $signUpCount - 15;
+		$newpercent = $newCount / 10 * 100;
+		setNewPerc("#count25", $newpercent, $signUpCount)
+	} else if ($signUpCount>=25 && $signUpCount < 50) { 
+		completeBlock("#count5");
+		completeBlock("#count15");
+		completeBlock("#count25");
+		$newCount = $signUpCount - 25;
+		$newpercent = $newCount / 25 * 100;
+		setNewPerc("#count50", $newpercent, $signUpCount)
+	} else {
+		completeBlock("#count5");
+		completeBlock("#count15");
+		completeBlock("#count25");
+		completeBlock("#count50");
+	}
+
+{% endblock %}
+
+{% block content %}
+{% include "navbar.html" %}
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+      	<div class='row'>
+        <div class='col-md-6 pull-right' style='text-align:center;'>
+           
+	        <h1><i class="fa fa-share-alt"></i> </br>Invite Friends &amp; Earn Rewards</h1>
+	        <p>Share your unique link below via Email, Facebook, Twitter, Reddit, or LInkedIn to earn rewards from vsdmg.com</p>
+	        <div class='well' style='background-color:#FFFFFF'>
+	        	{{ ref_url }}
+	        </div>
+
+	        Share
+	        <br/>
+	        <a href="https://www.facebook.com/sharer/sharer.php?u={{ ref_url }}" target="_blank">
+		        <i class="fa fa-facebook-square fa-4x" style="color:#3b5998"></i>
+		    </a>
+		    <a href="https://twitter.com/home?status=I'm%20going%20to%20learn%20to%20Code...%20Come%20build%20an%20web%20apsp%20with%20me!%20%23CFE%20and%20@kangeugine_%20{{ ref_url }}" target="_blank">
+		        <i class="fa fa-twitter-square fa-4x" style="color:#4099FF"></i>
+		    </a>
+		    <a href="http://www.reddit.com/submit?url={{ ref_url }}&title=no%20more%20split%20decisions" target="_blank">
+		        <i class="fa fa-reddit-square fa-4x" style="color:#007bb6"></i>
+		    </a>
+		    <a href="https://www.linkedin.com/shareArticle?mini=false&url={{ ref_url }}&title=no%20more%20split%20decisions&summary=data scientist approach to mma&source={{ ref_url }}" target="_blank">
+		        <i class="fa fa-linkedin-square fa-4x" style="color:#900020"></i>
+		    </a>
+		    <a href='https://plus.google.com/share?url={{ ref_url }}' target="_blank">
+		        <i class="fa fa-google-plus-square fa-4x" style="color:#d34856"></i>
+		    </a>
+
+        </div>
+            <div class='col-md-6 pull-left'>
+                <img src="{% static 'img/sharemma.jpg' %}" class='img-responsive img-rounded' />
+            </div>
+        </div>
+
+      </div>
+    </div>
+
+<div class='container' style="text-align:center">
+
+
+Joined Number is: {{ count }}</br>
+<div class="row">
+	<div class="col-sm-3">
+	<h3>5 Joined</h3>
+		<div class="progress">
+		  <div class="progress-bar" id='count5' role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: 0%;">
+		    0%
+		  </div>
+		</div>
+		<h4>Reward Name</h4>
+		<div class="row">
+			<div class="col-xs-6 col-md-6">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvF__DSzwvn9GemeeQ-V4O1ldpVNqrR8KWqFQ1QEmcNZLq3ko-MQ" class='img-responsive img-rounded' />
+			</div>
+			<div class="col-xs-6 col-md-6">
+				<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRpxKzYzjI8BGE90rmZrxPSebkf7HTLWvkd1EPKxKIFLoHu8sF2Yg" class='img-responsive img-rounded' />
+			</div>
+		</div>
+
+		<hr/>
+		<span style='text-align:left !important;'>
+			<h5>Rewards Include:</h5>
+				<ul>
+					<li>Round 1</li>
+					<li>Round 2</li>
+					<li>Round 3</li>
+				</ul>
+		</span>
+		<hr/>
+	</div>
+
+	<div class="col-sm-3">
+	<h3>15 Joined</h3>
+		<div class="progress">
+		  <div class="progress-bar" id='count15' role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: 0%;">
+		    0%
+		  </div>
+		</div>
+		<h4>Reward Name</h4>
+		<div class="row">
+			<div class="col-xs-6 col-md-6">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvF__DSzwvn9GemeeQ-V4O1ldpVNqrR8KWqFQ1QEmcNZLq3ko-MQ" class='img-responsive img-rounded' />
+			</div>
+			<div class="col-xs-6 col-md-6">
+				<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRpxKzYzjI8BGE90rmZrxPSebkf7HTLWvkd1EPKxKIFLoHu8sF2Yg" class='img-responsive img-rounded' />
+			</div>
+		</div>
+
+		<hr/>
+		<span style='text-align:left !important;'>
+			<h5>Rewards Include:</h5>
+				<ul>
+					<li>Round 1</li>
+					<li>Round 2</li>
+					<li>Round 3</li>
+				</ul>
+		</span>
+		<hr/>
+	</div>
+
+	<div class="col-sm-3">
+	<h3>25 Joined</h3>
+		<div class="progress">
+		  <div class="progress-bar" id="count25" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: 0%;">
+		    0%
+		  </div>
+		</div>
+		<h4>Reward Name</h4>
+		<div class="row">
+			<div class="col-xs-6 col-md-6">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvF__DSzwvn9GemeeQ-V4O1ldpVNqrR8KWqFQ1QEmcNZLq3ko-MQ" class='img-responsive img-rounded' />
+			</div>
+			<div class="col-xs-6 col-md-6">
+				<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRpxKzYzjI8BGE90rmZrxPSebkf7HTLWvkd1EPKxKIFLoHu8sF2Yg" class='img-responsive img-rounded' />
+			</div>
+		</div>
+
+		<hr/>
+		<span style='text-align:left !important;'>
+			<h5>Rewards Include:</h5>
+				<ul>
+					<li>Round 1</li>
+					<li>Round 2</li>
+					<li>Round 3</li>
+				</ul>
+		</span>
+		<hr/>
+
+	</div>
+
+	<div class="col-sm-3">
+	<h3>50 Joined</h3>	
+		<div class="progress">
+		  <div class="progress-bar" id="count50" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em; width: 0%;">
+		    0%
+		  </div>
+		</div>
+		<h4>Reward Name</h4>
+		<div class="row">
+			<div class="col-xs-6 col-md-6">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvF__DSzwvn9GemeeQ-V4O1ldpVNqrR8KWqFQ1QEmcNZLq3ko-MQ" class='img-responsive img-rounded' />
+			</div>
+			<div class="col-xs-6 col-md-6">
+				<img src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRpxKzYzjI8BGE90rmZrxPSebkf7HTLWvkd1EPKxKIFLoHu8sF2Yg" class='img-responsive img-rounded' />
+			</div>
+		</div>
+
+		<hr/>
+		<span style='text-align:left !important;'>
+			<h5>Rewards Include:</h5>
+				<ul>
+					<li>Round 1</li>
+					<li>Round 2</li>
+					<li>Round 3</li>
+				</ul>
+		</span>
+		<hr/>
+	</div>
+</div>
+
+{% endblock %}
